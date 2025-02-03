@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+.bg-prim{
+    background-color: rgb(32,37,49);
+}
+
+*{
+    font-family: "Quicksand", serif;
+}
+
+.header .fa-bars{
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-close {
+    background-color: rgb(255, 255, 255);
+}
+
+.canvas-items{
+    font-size: 20px;
+}
+
+.canvas-items:hover{
+    background-color: rgb(236, 145, 43);
+    color: rgb(255, 255, 255);
+    border-right: 10px solid rgb(255, 255, 255);
+}
+
+.canvas-items a{
+    color: #ffffff;
+    text-decoration: none;
+    display: block; 
+    width: 100%;
+    height: 100%;
+    padding: 1.7rem;
+}
+
+.offcanvas-header{
+    border-bottom: 1px solid rgb(255, 255, 255); 
+}
+
+.offcanvas-title{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+
+
+.bg-purple{
+background-color: rgb(89, 86, 214);
+}
+
+.bg-lightblue{
+background-color: rgb(52, 154, 255);
+}
+
+.bg-yellow{
+background-color: rgb(236, 173, 33);
+}
+
+.bg-salmon{
+background-color: rgb(218, 93, 92);
+}
+
+.container-cards .card{
+border-radius: 10px;
+}
+
+.container-cards, .container-graphs {
+    width: 100%;
+    max-width: 1800px; /* Ancho máximo deseado */
+    margin: 0 auto; /* Centrar el contenedor */
+    padding-bottom: 15px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1500px) {
+    .container-cards, .container-graphs {
+        width: 1500px;
+    }
+}
+
+.container{
+    max-width: 1600px;
+}
+
+#btn-stats{
+    color: white;
+    font-size: 17px;
+}
+
+#btn-stats:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(32,37,49,0.7);;
+}
+
+.container-busqueda .col i{
+    font-size: 20px;
+}
+
+.container-busqueda i,.container-btn-add-pdf i{
+    font-size: 35px;
+}
+
+.color-prim{
+    color: rgb(236, 145, 43);
+}
+
+.container-busqueda i:hover,.container-btn-add-pdf i:hover,.hover:hover{
+    filter: brightness(0.8);
+}
+
+.fa-magnifying-glass:hover{
+    opacity: 0.2;
+}
+
+.table-responsive{
+    font-size: 18px;
+    overflow-x: auto; /* Asegura que la tabla sea responsive */
+}
+
+.bg-table{
+    --bs-table-bg: rgb(236, 145, 43);
+}
+
+.table{
+    align-items: center;
+}
+
+.table th, .table td {
+    text-align: center; /* Centrar horizontalmente */
+    vertical-align: middle; /* Centrar verticalmente */
+}
+
+
+@media (max-width: 768px) { /* Ajusta este valor si es necesario */
+    .img-nav {
+        display: none;
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .table thead {
+        display: none; /* Ocultar cabecera de la tabla en dispositivos pequeños */
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block; /* Cambiar la tabla a formato de bloque */
+        width: 100%; /* Asegurar que cada fila ocupe el 100% del ancho */
+    }
+
+    .table tr {
+        margin-bottom: 1rem; /* Espaciado entre filas */
+    }
+
+    .table td {
+        text-align: right; /* Alinear texto a la derecha para consistencia */
+        position: relative;
+        padding-left: 50%; /* Espacio para la etiqueta */
+    }
+
+    .table td::before {
+        content: attr(data-label); /* Mostrar el contenido del atributo data-label */
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 1rem;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
+.container-tabla nav ul{
+    --bs-pagination-color: rgb(236, 145, 43);
+    --bs-pagination-active-bg:rgb(236, 145, 43);
+    --bs-pagination-active-border-color:rgb(145, 87, 20);
+    --bs-pagination-color-hover: rgb(0, 0, 0);
+}
+
+
+.container-card-agregar .form-control{
+    border-color: rgb(236, 145, 43,0.2); 
+}
+
+.container-card-agregar .form-control:hover{
+    border-color: rgb(236, 145, 43);
+    color: black;
+    font-weight: bold;
+}
+
+.container-card-agregar input, .container-card-agregar select, .container-card-agregar label{
+    margin-top: 10px;
+}
+
+.container-card-agregar label{
+    font-weight: bold;
+}
+
+.container-card-agregar{
+    width: 600px;
+
+}
+
+.container-card-agregar .card{
+    border-radius: 15px;
+}
+
+.full-content{
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
+
+.footer {
+    background-color: rgb(32,37,49);;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+}
+
+.btn-addProd{
+    background-color:  rgb(236, 145, 43);
+}
+
+.btn-cancelProd{
+    background-color: rgb(32,37,49);
+    color: white;
+}
+
+.btn-addProd:hover{
+    background-color:  rgb(206, 126, 35);
+}
+
+.btn-cancelProd:hover{
+    background-color: rgb(78, 89, 110);
+    color: white;
+}
+
+.fa-pen-to-square{
+    color: rgb(236, 145, 43);
+    font-size: 20px;
+}
+
+.fa-pen-to-square:hover{
+    color: rgb(189, 116, 34);
+    font-size: 20px;
+}
+
+.btn-orange{
+    background-color: #ec912b;
+    color: white;
+}
+
+.btn-orange:hover{
+    background-color: rgb(173, 106, 29);
+    color: rgb(255, 255, 255);
+}
+
+.contenedor-login{
+    height: 80dvh;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-graph{
+    background-color: rgb(32,37,49,0.05);
+    border-radius: 10px;
+    width: auto;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+
+
+@media (max-width: 768px) { /* Ajusta este valor si es necesario */
+    .container-card-agregar{
+        width: auto;
+    }
+  }

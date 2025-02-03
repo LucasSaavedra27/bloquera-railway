@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Empleados{% endblock%}
+{% block content %}
+
+<main class="main">
+    <div class="container">
+    <h3 class="text-center pt-3">Registro de Empleados</h3>
+    <div class="d-flex justify-content-center"><a href="{% url 'personal:agregarEmpleado' %}" style="font-size: 35px;"><i class="fa-solid fa-square-plus color-prim"></i></a></div>
+    <div class="container-tabla pt-3">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="bg-table">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ empleado.nombre }}</td>
+                            <td>{{ empleado.direccion }}</td>
+                            <td>{{ empleado.telefono }}</td>
+                            {% if empleado.estado == 'Inactivo' %}
+                                <td style="background-color: #cf4128;">
+                                    {{ empleado.estado}}
+                                </td>
+                            {% else %}
+                            <td>
+                                {{ empleado.estado}}
+                            </td>
+                            {% endif %}
+                            <td>
+                                <a href="{% url 'personal:editarEmpleado' empleado.id %}" style="text-decoration: none;" class="icon-link">
+                                    <i class="fa-solid fa-pen-to-square" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay empleados disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        {% block js %}
+        <script src="{% static 'js/tratamientoFechas.js'%}"></script>
+        {% endblock %}
+        
+    </div>
+</main>
+{% endblock %}

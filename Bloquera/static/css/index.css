@@ -1,0 +1,241 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+    font-family: "Nunito Sans", serif;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfilUser{
+    border-radius: 100%;
+    background-color: rgb(236, 173, 33);
+    width: 50px;
+    height: 50px;
+}
+
+.container {
+  flex: 1;
+  min-width: 100%;
+  min-height: auto; /* 100% de la altura de la ventana */
+  padding: 2rem; /* Agregar un poco de padding */
+}
+
+
+.button-rounded {
+  font-family: "Roboto", serif;
+  padding: 10px 20px;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  background-color: rgb(236, 145, 43);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+  
+.button-rounded:hover {
+  background-color: rgb(236, 145, 43,0.8);
+}
+
+
+@media (max-width: 768px) { /* Ajusta este valor si es necesario */
+  .img-animada {
+      display: none;
+  }
+}
+
+.glass-card {
+  padding: 2rem;
+  background-color: rgb(0,0,0);
+  border-radius: 24px;
+  overflow: hidden;
+  color: rgb(255, 255, 255);
+  z-index: 1; /* Asegura que el contenido esté encima del fondo difuminado */
+}
+
+
+.footer {
+  display: flex;
+  background-color: rgb(17, 17, 17);;
+  text-align: center;
+  justify-content: center;
+  border-top: 1px solid rgb(255, 255, 255,0.1);
+  padding: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.navbar-nav a{
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  margin-right: 20px;
+}
+
+.navbar-nav a:hover{
+  color: rgb(175, 175, 175);
+}
+/* background-color: rgb(32,37,49);*/
+
+.tittle{
+  font-family: "Cardo", serif;
+  font-size: 50px;
+}
+
+.underlight {
+  position: relative;
+  z-index: 1;
+  padding: 0 5px;
+  display: inline-block;}
+
+.underlight:before {
+  content: "";
+  position: absolute;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(236, 145, 43);
+  z-index: -1;
+}
+
+.descrip{
+  font-family: "Roboto", serif;
+  font-size: 20px;
+}
+
+.card-img {
+  width: 650px;
+  height: 400px;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.img-card {
+  max-width: 100%;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  object-fit: cover;
+}
+
+.img-card:hover {
+  transform: scale(1.2);
+  filter: brightness(0.4); /* Para oscurecer la imagen */
+}
+
+.card{
+  border-radius: 10px;
+  border-color: black;
+}
+
+.icon-ig{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(17, 17, 17);
+  border-radius: 20px;
+  border: 2px solid rgb(155, 155, 155);
+  color: rgb(155, 155, 155);
+  font-size: 30px;
+}
+
+.icon-ig:hover{
+  color: rgb(221, 93, 7);
+  border: 2px solid rgb(236, 145, 43);
+}
+
+.credits a{
+  color: rgb(236, 145, 43);
+  text-decoration: none;
+}
+
+@keyframes subirBajar {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.img-animada {
+  animation: subirBajar 3s infinite ease-in-out;
+}
+
+.btn-calcular-block{
+  background-color: rgb(236, 145, 43);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 4px;
+  margin-top: 1rem;
+  font-size: 20px;
+}
+
+.btn-calcular-block:hover{
+  background-color: rgb(236, 145, 43,0.8);
+}
+
+.card-calculadora {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  width: 90%; 
+  max-width: 1200px; 
+  height: auto; 
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin: auto; 
+}
+
+.card-calculadora img {
+  max-width: 100%; 
+  height: auto;
+}
+
+.card-calculadora input,
+.card-calculadora button {
+  width: 100%;
+  max-width: 300px; 
+  margin: 0 auto; 
+}
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 70px;
+  height: 70px;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.whatsapp-icon:hover {
+  background-color: #1ebe57;
+}
+.whatsapp-icon img {
+  width: 50px; 
+  height: 50px;
+}
+
+.whatsapp-icon {
+  transition: transform 0.3s ease;
+}
+.whatsapp-icon:hover {
+  transform: scale(1.3);
+}

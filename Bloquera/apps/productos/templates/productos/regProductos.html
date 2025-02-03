@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Productos{% endblock%}
+{% block content %}
+
+<main class="main">
+    <div class="container">
+    <h3 class="text-center pt-3">Registro de Productos</h3>
+    <div class="d-flex justify-content-center"><a href="{% url 'productos:agregarProducto' %}" style="font-size: 35px;"><i class="fa-solid fa-square-plus color-prim"></i></a></div>
+    <div class="container-tabla pt-3">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="bg-table">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio de costo</th>
+                        <th scope="col">Precio de venta</th>
+                        <th scope="col">Fecha de elab.</th>
+                        <th scope="col">Cantidad disponible</th>
+                        <th scope="col">Cantidad Min. requerida</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ producto.nombre }}</td>
+                            {% load l10n %}
+                            {% localize on %}
+                            <td>${{ producto.precioDeCosto }}</td>
+                            {% endlocalize %}
+                            {% load l10n %}
+                            {% localize on %}
+                            <td>${{ producto.precioDeVenta }}</td>
+                            {% endlocalize %}
+                            <td>{{ producto.fechaDeElaboracion|date:"d/m/Y" }}</td>
+                            {% if producto.cantidadDisponible <= producto.cantidadMinRequerida %}
+                                <td style="background-color: #cf4128;">
+                                    {{ producto.cantidadDisponible}}
+                                </td>
+                            {% else %}
+                            <td>
+                                {{ producto.cantidadDisponible}}
+                            </td>
+                            {% endif %}
+                            <td>{{ producto.cantidadMinRequerida }}</td>
+                            <td>
+                                <a href="{% url 'productos:editarProducto' producto.id %}" style="text-decoration: none;" class="icon-link">
+                                    <i class="fa-solid fa-pen-to-square" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay productos disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        {% block js %}
+        <script src="{% static 'js/tratamientoFechas.js'%}"></script>
+        {% endblock %}
+        
+    </div>
+</main>
+{% endblock %}

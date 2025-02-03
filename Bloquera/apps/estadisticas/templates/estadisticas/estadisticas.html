@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Estadísticas{% endblock%}
+{% block content %}
+<main class="main">
+    <div class="container d-flex justify-content-center">
+        <div class="container-cards">
+            <div class="row"> 
+                <h2 class="text-center pt-2">Estadísticas rápidas</h2>
+                <div class="col-sm-12 col-md-6 col-xl-3 pt-2">
+                    <div class="card bg-purple text-white shadow">
+                        <div class="p-4">
+                            <h3 style="color: white;"><i class="fa-solid fa-sack-dollar pe-3"></i>Ventas diarias</h3>
+                            <span style="font-size: 30px; font-weight: bold;"><i class="fa-solid fa-dollar-sign pe-3"></i>{{totalVentas}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-3 pt-2">
+                    <div class="card bg-lightblue text-white shadow">
+                        <div class="p-4">
+                            <h3 style="color: white;"><i class="fa-solid fa-sack-dollar pe-3"></i>Ventas semanales</h3>
+                            <span style="font-size: 30px; font-weight: bold;"><i class="fa-solid fa-dollar-sign pe-3"></i>{{totalVentasSemanales}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-3 pt-2">
+                    <div class="card bg-yellow text-white shadow">
+                        <div class="p-4">
+                            <h3 style="color: white;"><i class="fa-solid fa-sack-dollar pe-3"></i>Ventas mensuales</h3>
+                            <span style="font-size: 30px; font-weight: bold;"><i class="fa-solid fa-dollar-sign pe-3"></i>{{totalVentasMensuales}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sn-12 col-md-6 col-xl-3 pt-2">
+                    <div class="card bg-salmon text-white shadow">
+                        <div class="p-4">
+                            <h3 style="color: white;"><i class="fa-solid fa-triangle-exclamation pe-3"></i>Gastos mensuales</h3>
+                            <span style="font-size: 30px; font-weight: bold;"><i class="fa-solid fa-dollar-sign pe-3"></i>{{totalGastosMensuales}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="container-graphs">
+            <h2 class="text-center pt-2 pb-2">Gráficos estadísticos</h2>
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12 col-md-6 p-2">
+                    <div class="card-graph">
+                        <canvas id="ventasMensuales"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 p-2">
+                    <div class="card-graph">
+                        <canvas id="productosMasVendidos"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% block js%}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/graficoDeBarras.js' %}"></script>
+    <script src="{% static 'js/graficoDeTorta.js' %}"></script>
+{% endblock %}
+{% endblock %}

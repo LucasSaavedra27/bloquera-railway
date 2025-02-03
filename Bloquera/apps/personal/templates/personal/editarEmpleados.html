@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Editar Empleados{% endblock%}
+{% block content %}
+
+<main class="main">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="container-card-agregar">
+            <div class="card p-5 mt-4 shadow">
+                <h3 class="text-center">Edición de empleados</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-addProd w-100 mt-3">Guardar Empleado</button>
+                    <a href="{% url 'personal:regEmpleados'%}" style="text-decoration: none;" class="btn btn-cancelProd w-100 mt-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% block js %}
+    <script src="{% static 'js/tratamientoTelefono.js' %}"></script>
+{% endblock %}
+{% endblock %}

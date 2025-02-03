@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Agregar ventas{% endblock%}
+{% block content %}
+
+<main class="main">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="container-card-agregar">
+            <div class="card p-5 mt-4 shadow">
+                <h3 class="text-center">Registro de venta</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ ventaForm.as_p }}
+
+                    <h3>Detalles de Venta</h3>
+                    {{ detalleVentaFormset.management_form }}
+
+                    <div id="detalleVentaContainer">
+                        {% for form in detalleVentaFormset %}
+                            <div class="detalle-form">
+                                {{ form.as_p }}
+                                <h5 class="subtotal" id="detalleVenta-{{ forloop.counter0 }}-subtotal">Subtotal: $<span id="id_block-{{ forloop.counter0 }}-precio"></span></h5>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn btn-orange mt-3" id="btn-add">Agregar producto</button>
+                    <div class="d-flex justify-content-end">
+                        <h4 class="total">Total: $<span id="id_total_ventas"></span></h4>
+                    </div>
+                    <button type="submit" class="btn btn-orange w-100 mt-3">Guardar Venta</button>
+                    <a href="{% url 'ventas:regVentas' %}" class="btn btn-cancelProd w-100 mt-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% block js %}
+    <script src="{% static 'js/añadirFormVentas.js' %}"></script>
+    <script src="{% static 'js/tratamientoFechas.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

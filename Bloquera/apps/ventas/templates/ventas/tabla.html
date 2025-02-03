@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de ventas PDF</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+        }
+        th {
+            background-color: orange;
+            color: white;
+        }
+        ul {
+            list-style:circle;
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;"><strong>Listado de ventas</strong></h1>
+    <strong>Rango de busqueda</strong><br>
+    {% if fecha_inicio %}
+        <strong>Fecha de inicio: <span>{{fecha_inicio}}</span></strong><br>
+    {% else %}
+        <strong>Fecha de inicio: <span>No asignada</span></strong><br>
+    {% endif %}
+    {% if fecha_fin %}
+        <strong>Fecha de fin: <span>{{fecha_fin}}</span></strong><br>
+    {% else %}
+        <strong>Fecha de fin: <span>No asignada</span></strong><br>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fecha de venta</th>
+                <th>Forma de pago</th>
+                <th>Lugar de entrega</th>
+                <th>Total</th>
+                <th>Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for venta in ventas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ venta.fechaDeVenta|date:"d/m/Y" }}</td>
+                <td>{{ venta.formaDePago }}</td>
+                <td>{{ venta.lugarVenta }}</td>
+                {% load l10n %}
+                    {% localize on %}
+                    <td>${{ venta.total }}</td>
+                    {% endlocalize %}
+                <td>
+                    <ul>
+                        {% for detalle in venta.detalleVenta.all %}
+                            <li>
+                                {{ detalle.block.nombre }} - {{ detalle.cantidad }} U - ${{ detalle.subTotal }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No hay ventas disponibles.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

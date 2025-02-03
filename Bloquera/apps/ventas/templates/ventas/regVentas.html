@@ -1,0 +1,176 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block tittle %}Ventas{% endblock%}
+{% block content %}
+<main class="main">
+    <div class="container">
+        <div class="container-busqueda">
+            <h3 class="text-center pt-3">Registro de ventas</h3>
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3">
+                    <form action="{% url 'ventas:buscarVentas' %}" method="get" class="row align-items-center">
+                        <div class="col mb-2">
+                            <label for="busqueda-inicio">Fecha de inicio:</label>
+                            <input type="date" name="busqueda_inicio" class="form-control" value="{{ fecha_inicio }}">                   
+                    
+                            <label for="busqueda-fin">Fecha de fin:</label>
+                            <input type="date" name="busqueda_fin" class="form-control" value="{{ fecha_fin }}">
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'ventas:regVentas' %}" class="btn btn-link"><i class="fa-solid fa-rotate-left color-prim"></i></a>
+                            <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                       
+                </div>
+            </div>
+        </div>
+        <div class="container-btn-add-pdf">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="{% url 'ventas:agregarVenta'%}" class="btn btn-link"><i class="fa-solid fa-square-plus color-prim"></i></a>
+                    <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-file-pdf color-prim"></i></a>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Filtrar por Fecha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'ventas:generarPDFVentas' %}" method="get" class="row align-items-center">
+                            <div class="col mb-2">
+                                <label for="busqueda-inicio">Fecha de inicio:</label>
+                                <input type="date" name="busqueda_inicio_PDF" class="form-control" value="{{ fecha_inicio }}">                   
+        
+                                <label for="busqueda-fin">Fecha de fin:</label>
+                                <input type="date" name="busqueda_fin_PDF" class="form-control" value="{{ fecha_fin }}">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-orange"><i class="fa-solid fa-magnifying-glass"></i> Descargar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="container-tabla pt-3">
+            <nav class="d-flex justify-content-center" aria-label="...">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">Anterior</a>
+                        </li>
+                    {% endif %}
+            
+                    <!-- Páginas numeradas -->
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{ num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+            
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">Siguiente</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="bg-table">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Fecha de venta</th>
+                            <th scope="col">Forma de pago</th>
+                            <th scope="col">Lugar de entrega</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for venta in page_obj %} 
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ venta.fechaDeVenta|date:"d/m/Y" }}</td>
+                        <td>{{ venta.formaDePago }}</td>
+                        <td>{{ venta.lugarVenta }}</td>
+                        {% load l10n %}
+                            {% localize on %}
+                            <td>${{ venta.total }}</td>
+                            {% endlocalize %}
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDetallesVenta" class="btnVerDetalles" data-venta-id="{{ venta.id }}"><i class="fa-solid fa-eye color-prim hover" title="Ver detalles"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10">No hay ventas disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Botón que abre el modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalDetallesVenta" tabindex="-1" aria-labelledby="modalDetallesVentaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDetallesVentaLabel">Detalles de la venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Aquí pondremos los detalles de la venta -->
+            <p><strong>ID de venta:</strong> <span id="modal-venta-id"></span></p>
+            <p><strong>Fecha:</strong> <span id="modal-venta-fecha"></span></p>
+            <p><strong>Total:</strong> <span id="modal-venta-total"></span></p>
+            <h6><strong>Productos:</strong></h6>
+            <ul id="modal-detalles-productos">
+              <!-- Los productos de la venta se cargarán aquí -->
+            </ul>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn hover text-white" style="background-color: #ec912b;" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+{% block js %}
+    <script src="{% static 'js/tratamientoFechas.js'%}"></script>
+    <script src="{% static 'js/modalDetallesVenta.js'%}"></script>
+      
+{% endblock %}
+{% endblock %}
